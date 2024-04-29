@@ -7,13 +7,17 @@ import java.util.regex.Pattern;
 public class Calculator {
 
     Scanner sc = new Scanner(System.in);
-    private List<Double> list = new ArrayList<>();
-    private double c = 0;
+    private final List<Double> list = new ArrayList<>();
+    // 추후 추가 선언을 해서 문제을 잃으키지 않기 위해서 final 로 선언함
+    private final List<Double> list_circle = new ArrayList<>();
 
     public Calculator() {}
 
-    public double calculate(double a, String str, double b) throws Calculator_Exception {
 
+    // 계산식이니 나중에 실수로 추가 선언해서 문제 안생기도록 만듬
+    final double calculate(double a, String str, double b) throws Calculator_Exception {
+
+        double c = 0;
         String p = "^[a-zA-Z]*$";
         String num = "^[0-9]*$";
 
@@ -45,6 +49,10 @@ public class Calculator {
         System.out.println(Arrays.toString(list.toArray()));
     }
 
+    public void first_viewList() {
+        System.out.println(list.get(0));
+    }
+
     public void setList() {
         System.out.println("저장 내역 수정");
         while (true){
@@ -61,6 +69,21 @@ public class Calculator {
                 break;
             }
         }
-        this.list = list;
     }
+
+    final public void half_circle(double a){
+        double A = Math.round(3.1415 * Math.pow(a, 2));
+        System.out.println("원의 넓이 : "+A);
+        list_circle.add(A);
+    }
+
+    public void setList_circle(){
+        list_circle.remove(0);
+    }
+
+    public List<Double> getList_circle() {
+        return list_circle;
+    }
+
+    public void view_circle(){System.out.println(Arrays.toString(list_circle.toArray()));}
 }
