@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 public class App {
     public static void app_calculate() {//쓰기 편하게 하려고
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        Calculator cr = new Calculator();
+        ArithmeticCalculator A_cr = new ArithmeticCalculator();
+        CircleCalculator Ci_cr = new CircleCalculator();
+
 
         try {
             System.out.print("원넓이 or 사칙연산 : ");
@@ -19,11 +21,12 @@ public class App {
                     if(half.equals("end")){
                         break;
                     } else if (half.equals("view")) {
-                        cr.view_circle();
+                        Ci_cr.view_circle();
                     }else if (half.equals("remove")) {
-                        cr.setList_circle();
+                        Ci_cr.setList_circle();
+                        Ci_cr.view_circle();
                     }else {
-                        cr.half_circle(Double.parseDouble(half));
+                        Ci_cr.half_circle(Double.parseDouble(half));
                     }
                     System.out.println();
                 }
@@ -37,7 +40,7 @@ public class App {
                     str = bf.readLine();
 
                     try {
-                        System.out.println("계산값 : "+cr.calculate(a, str, b));
+                        System.out.println("계산값 : "+ A_cr.calculate(a, str, b));
                     } catch (Calculator_Exception e) {
                         String message = e.getMessage();
                         System.out.println(message);
@@ -46,17 +49,17 @@ public class App {
                     while (true){
                         System.out.print("더 계산하시겠습니까? (help) : ");
                         str = bf.readLine();
-                        if (str.equals("exit")) {
+                        if (str.equals("end")) {
                             System.exit(0);
                         }else if (str.equals("modify")) {
-                            cr.setList();
+                            A_cr.modify_List();
                         }else if (str.equals("view")) {
-                            cr.viewList();
+                            A_cr.viewList();
                         }else if (str.equals("first")) {
                             System.out.print("첫 값 : ");
-                                    cr.first_viewList();
+                            A_cr.first_viewList();
                         }else if (str.equals("help")) {
-                            System.out.println("exit,view,modify,first");
+                            System.out.println("end,view,modify,first");
                         }else{
                             break;
                         }
