@@ -1,11 +1,27 @@
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-public class ArithmeticCalculator extends Calculator {
+public class ArithmeticCalculator<T,U> extends Calculator {
 
+    private T t;
+
+    private U u;
+
+    public T get_t() {
+        return t;
+    }
+    public U get_u() {
+        return u;
+    }
+    public void add(T t, U u) {
+        this.t = t;
+        this.u = u;
+    }
 
     final double calculate(double a, String str, double b) throws Calculator_Exception {
 
+        ArithmeticCalculator<Double,Double> art = new ArithmeticCalculator<>();
+        art.add(a, b);
         AllOperator all_a = new AddOperator();
         String p = "^[a-zA-Z]*$";
         String num = "^[0-9]*$";
@@ -27,7 +43,7 @@ public class ArithmeticCalculator extends Calculator {
             throw new Calculator_Exception(" 제대로 된 값을 입력해 주세요");
         }
 
-        answer = all_a.operate(a, b);
+        answer = all_a.operate(art.get_t(), art.get_u());
         getList().add(answer);
         return answer;
     }
