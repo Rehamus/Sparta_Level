@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,11 +11,11 @@ public class Calculator {
     public Calculator() {}
 
     // 사칙연산 get set
+    public List<Double> getList_circle() {
+        return list;
+    }
     public void setList(List<Double> list) {
         this.list = list;
-    }
-    public List<Double> getList_circle() {
-        return list_circle;
     }
 
     // 원둘래 get set

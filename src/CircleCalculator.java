@@ -9,7 +9,7 @@ public class CircleCalculator extends Calculator {
     }
 
     public void setList_circle(){
-        getList_circle().remove(0);
+        getList_circle().removeFirst();
     }
 
     public void view_circle(){System.out.println(Arrays.toString(getList_circle().toArray()));}

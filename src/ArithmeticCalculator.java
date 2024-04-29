@@ -34,7 +34,7 @@ public class ArithmeticCalculator extends Calculator {
     }
 
     public void first_viewList() {
-        System.out.println(getList().get(0));
+        System.out.println(getList().getFirst());
     }
 
     public void modify_List() {
@@ -47,7 +47,7 @@ public class ArithmeticCalculator extends Calculator {
                 System.out.print("추가값 :");
                 getList().add(sc.nextDouble());
             }else if (st.equals("-")){
-                getList().remove(0);
+                getList().removeFirst();
             }else if (st.equals("end")){
                 System.out.println();
                 break;
