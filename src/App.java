@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 
 public class App {
-    public static void main(String[] args) {
+    public static void app_calculate() {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Calculator cr = new Calculator();
 
@@ -18,17 +18,23 @@ public class App {
                 String str = bf.readLine();
 
                 try {
-                    System.out.println(cr.calculate(a, str, b));
+                    System.out.println("계산값 : "+cr.calculate(a, str, b));
                 } catch (Calculator_Exception e) {
                     String message = e.getMessage();
                     System.out.println(message);
                 }
 
-                System.out.print("더 계산하시겠습니까? (exit 입력 시 종료) : ");
+                System.out.print("더 계산하시겠습니까? (exit,view,modify) : ");
                 str = bf.readLine();
                 if (str.equals("exit")) {
                     System.exit(0);
+                }else if (str.equals("modify")) {
+                    cr.setList();
+                }else if (str.equals("view")) {
+                    cr.viewList();
                 }
+
+                System.out.println();
 
             }
         } catch (IOException e) {

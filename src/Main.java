@@ -1,9 +1,8 @@
 
 
 public class Main {
-    public static void main(String[] args) throws Calculator_Exception {
-
-
-
+    public static void main(String[] args) {
+        App app = new App();
+        app.app_calculate();
     }
 }
