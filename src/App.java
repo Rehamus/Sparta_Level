@@ -24,17 +24,25 @@ public class App {
                     System.out.println(message);
                 }
 
-                System.out.print("더 계산하시겠습니까? (exit,view,modify) : ");
-                str = bf.readLine();
-                if (str.equals("exit")) {
-                    System.exit(0);
-                }else if (str.equals("modify")) {
-                    cr.setList();
-                }else if (str.equals("view")) {
-                    cr.viewList();
+                while (true){
+                    System.out.print("더 계산하시겠습니까? (help) : ");
+                    str = bf.readLine();
+                    if (str.equals("exit")) {
+                        System.exit(0);
+                    }else if (str.equals("modify")) {
+                        cr.setList();
+                    }else if (str.equals("view")) {
+                        cr.viewList();
+                    }else if (str.equals("first_view")) {
+                        cr.viewList();
+                    }else if (str.equals("help")) {
+                        System.out.println("exit,view,modify,first_view");
+                    }else{
+                        break;
+                    }
                 }
-
                 System.out.println();
+
 
             }
         } catch (IOException e) {

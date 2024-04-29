@@ -10,6 +10,8 @@ public class Calculator {
     private List<Double> list = new ArrayList<>();
     private double c = 0;
 
+    public Calculator() {}
+
     public double calculate(double a, String str, double b) throws Calculator_Exception {
 
         String p = "^[a-zA-Z]*$";
@@ -39,11 +41,9 @@ public class Calculator {
         return list;
     }
 
-
     public void viewList() {
         System.out.println(Arrays.toString(list.toArray()));
     }
-
 
     public void setList() {
         System.out.println("저장 내역 수정");
