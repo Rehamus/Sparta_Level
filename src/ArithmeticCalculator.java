@@ -2,6 +2,12 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class ArithmeticCalculator extends Calculator {
+
+    final AddOperator add = new AddOperator();
+    final SubtractOperator sub = new SubtractOperator();
+    final DivideOperator div = new DivideOperator();
+    final MultiplyOperator mult = new MultiplyOperator();
+    final ModOperator mod = new ModOperator();
     // 계산식이니 나중에 실수로 추가 선언해서 문제 안생기도록 만듬
     final double calculate(double a, String str, double b) throws Calculator_Exception {
 
@@ -10,17 +16,17 @@ public class ArithmeticCalculator extends Calculator {
         String num = "^[0-9]*$";
 
         if (str.equals("+")){
-            c = a + b;
+            c = add.operate(a,b);
         }else if (str.equals("-")){
-            c = a - b;
+            c = sub.operate(a,b);
         }else if (str.equals("*")){
-            c = a * b;
+            c = mult.operate(a,b);
         }else if (str.equals("/")){
-            c = a / b;
+            c = div.operate(a,b);
         }else if (str.equals("%") && a == 0 || b == 0){
             throw new Calculator_Exception(" 0은 나눌 수 없습니다");
         }else if(str.equals("%")){
-            c = a%b;
+            c = mod.operate(a,b);
         }else if (str.isBlank()|| Pattern.matches(p,str) || Pattern.matches(num,str) ){
             throw new Calculator_Exception(" 제대로 된 값을 입력해 주세요");
         }
@@ -56,3 +62,4 @@ public class ArithmeticCalculator extends Calculator {
     }
 
 }
+
