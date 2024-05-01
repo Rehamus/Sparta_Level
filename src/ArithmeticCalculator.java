@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class ArithmeticCalculator<T,U> extends Calculator {
 
@@ -26,21 +28,26 @@ public class ArithmeticCalculator<T,U> extends Calculator {
         String p = "^[a-zA-Z]*$";
         String num = "^[0-9]*$";
         double answer = 0;
-        switch (str) {
-            case "+" -> all_a = OperatorType.ADD.getOperator();
-            case "-" -> all_a = OperatorType.SUB.getOperator();
-            case "*" -> all_a = OperatorType.MLT.getOperator();
-            case "/" -> all_a = OperatorType.DIV.getOperator();
-            case "%" -> {
-                if ( a == 0 || b == 0){
-                    throw new Calculator_Exception(" 0은 나눌 수 없습니다");
-                }else {
-                    all_a = OperatorType.MOD.getOperator();
-            }}
-            default -> throw new Calculator_Exception(" 제대로 된 값을 입력해 주세요");
+        if(num.matches(String.valueOf(a)) || num.matches(String.valueOf(b))) {
+            switch (str) {
+                case "+" -> all_a = OperatorType.ADD.getOperator();
+                case "-" -> all_a = OperatorType.SUB.getOperator();
+                case "*" -> all_a = OperatorType.MLT.getOperator();
+                case "/" -> all_a = OperatorType.DIV.getOperator();
+                case "%" -> {
+                    if ( a == 0 || b == 0){
+                        throw new Calculator_Exception(" 0은 나눌 수 없습니다");
+                    }else {
+                        all_a = OperatorType.MOD.getOperator();
+                    }}
+                default -> throw new Calculator_Exception(" 제대로 된 값을 입력해 주세요");
+            }
+            answer = all_a.operate(art.get_t(), art.get_u());
+            getList().add(answer);
+        } else {
+             answer = 666;
         }
-        answer = all_a.operate(art.get_t(), art.get_u());
-        getList().add(answer);
+
         return answer;
     }
 
@@ -51,9 +58,6 @@ public class ArithmeticCalculator<T,U> extends Calculator {
     public void first_viewList() {
         System.out.println(getList().getFirst());
     }
-
-
-
 
     public void modify_List() {
         System.out.println("저장 내역 수정");
