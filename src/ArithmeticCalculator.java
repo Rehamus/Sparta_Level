@@ -26,19 +26,23 @@ public class ArithmeticCalculator<T,U> extends Calculator {
         String p = "^[a-zA-Z]*$";
         String num = "^[0-9]*$";
         double answer = 0;
-        switch (str) {
-            case "+" -> all_a = OperatorType.ADD.getOperator();
-            case "-" -> all_a = OperatorType.SUB.getOperator();
-            case "*" -> all_a = OperatorType.MLT.getOperator();
-            case "/" -> all_a = OperatorType.DIV.getOperator();
-            case "%" -> {
-                if ( a == 0 || b == 0){
-                    throw new Calculator_Exception(" 0은 나눌 수 없습니다");
-                }else {
-                    all_a = OperatorType.MOD.getOperator();
-            }}
-            default -> throw new Calculator_Exception(" 제대로 된 값을 입력해 주세요");
+
+        if (str.equals("+")){
+            all_a = OperatorType.ADD.getOperator();
+        }else if (str.equals("-")){
+            all_a = OperatorType.SUB.getOperator();
+        }else if (str.equals("*")){
+            all_a = OperatorType.MLT.getOperator();
+        }else if (str.equals("/")){
+            all_a = OperatorType.DIV.getOperator();
+        }else if (str.equals("%") && a == 0 || b == 0){
+            throw new Calculator_Exception(" 0은 나눌 수 없습니다");
+        }else if(str.equals("%")){
+            all_a = OperatorType.MOD.getOperator();
+        }else if (str.isBlank()|| Pattern.matches(p,str) || Pattern.matches(num,str) ){
+            throw new Calculator_Exception(" 제대로 된 값을 입력해 주세요");
         }
+
         answer = all_a.operate(art.get_t(), art.get_u());
         getList().add(answer);
         return answer;
