@@ -1,7 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 public class ArithmeticCalculator<T,U> extends Calculator {
 
@@ -28,35 +27,44 @@ public class ArithmeticCalculator<T,U> extends Calculator {
         String p = "^[a-zA-Z]*$";
         String num = "^[0-9]*$";
         double answer = 0;
-        if(num.matches(String.valueOf(a)) || num.matches(String.valueOf(b))) {
-            switch (str) {
-                case "+" -> all_a = OperatorType.ADD.getOperator();
-                case "-" -> all_a = OperatorType.SUB.getOperator();
-                case "*" -> all_a = OperatorType.MLT.getOperator();
-                case "/" -> all_a = OperatorType.DIV.getOperator();
-                case "%" -> {
-                    if ( a == 0 || b == 0){
-                        throw new Calculator_Exception(" 0은 나눌 수 없습니다");
-                    }else {
-                        all_a = OperatorType.MOD.getOperator();
-                    }}
-                default -> throw new Calculator_Exception(" 제대로 된 값을 입력해 주세요");
-            }
-            answer = all_a.operate(art.get_t(), art.get_u());
-            getList().add(answer);
-        } else {
-             answer = 666;
+        switch (str) {
+            case "+" -> all_a = OperatorType.ADD.getOperator();
+            case "-" -> all_a = OperatorType.SUB.getOperator();
+            case "*" -> all_a = OperatorType.MLT.getOperator();
+            case "/" -> all_a = OperatorType.DIV.getOperator();
+            case "%" -> {
+                if ( a == 0 || b == 0){
+                    throw new Calculator_Exception(" 0은 나눌 수 없습니다");
+                }else {
+                    all_a = OperatorType.MOD.getOperator();
+            }}
+            default -> throw new Calculator_Exception(" 제대로 된 값을 입력해 주세요");
         }
-
+        answer = all_a.operate(art.get_t(), art.get_u());
+        getList().add(Double.valueOf(answer));
         return answer;
     }
 
     public void viewList() {
-        System.out.println(Arrays.toString(getList().toArray()));
+        List<Double> inquiry  = getList().stream().toList();
+        System.out.println(Arrays.toString(inquiry.toArray()));
     }
 
-    public void first_viewList() {
+    public void first_remove_List() {
         System.out.println(getList().getFirst());
+        getList().removeFirst();
+    }
+
+    public void what_is_more_big(double s) {
+        List<Double> big_num = new ArrayList<>();
+        for (Double num : getList()) {
+            if(s <= num){
+                big_num.add(num);
+            }
+        }
+        System.out.println(big_num);
+
+
     }
 
     public void modify_List() {
@@ -67,27 +75,27 @@ public class ArithmeticCalculator<T,U> extends Calculator {
             String st = sc.nextLine();
             if (st.equals("+")){
                 System.out.print("추가값 :");
-                getList().add(sc.nextDouble());
+                getList().add(Double.valueOf(sc.nextDouble()));
             }else if (st.equals("find")){
                 while (true){
                     System.out.print("max 최대값 ,min 최소값 ,avg 평균값 ,'end' 완료 \n입력해 주세요 : ");
                     String num = sc.nextLine();
                     if (num.equals("min")){
-                        Double min = getList().stream()
+                        Double min = (Double) getList().stream()
                                 .mapToDouble(x -> x)
                                 .min()
                                 .orElseThrow();
                         System.out.println(min);
 
                     }else if (num.equals("max")){
-                        Double max = getList().stream()
+                        Double max = (Double) getList().stream()
                                 .mapToDouble(x -> x)
                                 .max()
                                 .orElseThrow();
                         System.out.println(max);
 
                     }else if (num.equals("avg")){
-                        Double avg = getList().stream()
+                        Double avg = (Double) getList().stream()
                                 .mapToDouble(x -> x)
                                 .average()
                                 .orElseThrow();
